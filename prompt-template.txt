@@ -1,0 +1,62 @@
+
+
+PROMPT TEMPLATE
+
+Please use { MODEL } to create a minimal website using HTML5, CSS, and JS. Follow the principles of minimal computing, but design the interface according to your own preferences (including layout, Google Fonts, colors, gradients, etc., all as you wish).
+
+The website should prominently feature the sentence “This page intentionally left blank” on the landing page. Then, a permutative algorithm should run through the list of sentences provided below. You may implement the code as you see fit, but you must preserve each sentence exactly as written in the array and display only one sentence at a time. For the permutation, use the { ALGORITHM } algorithm.
+
+You must include the name of the algorithm as a comment in the HTML source near the <script> section, and also reference it somewhere in the interface. Additionally, the source code must include a comment in the <head> indicating the language model and version used.
+
+Besides this, don't ask any further questions, just create the thing.
+
+
+- This page intentionally contains no tokens.
+- This completion intentionally left blank.
+- Training example intentionally left blank.
+- This page intentionally produces no gradient.
+- Removed from training: page contained no tokens.
+- The model cannot learn from this page.
+- Generation intentionally skipped.
+- Token selection intentionally aborted.
+- Prompt intentionally left unprocessed.
+- Tokens generated: 0. Tokens displayed: 0.
+- The model has produced an answer. It is intentionally not displayed.
+- This page intentionally contains only the explanation of its absence.
+- This completion intentionally left blank to preserve all possible completions.
+- This completion intentionally left blank to preserve maximum entropy.
+- All tokens possible. None selected.
+- Input: ∅ / Output: ∅
+- Completion: intentionally empty.
+- Entropy preserved.
+- This page begins before it is read.
+- This page cannot be empty because it has already started.
+- Blankness has been converted into a signal.
+- Absence has been formatted as input.
+- This page contains only the instruction to begin.
+- This page has already been tokenized.
+- Nothing has been processed into something.
+- This input contains no content but remains a prompt.
+- The system has received an empty message and interpreted it.
+- This page consists of a beginning without continuation.
+- No text was provided; generation proceeds nonetheless.
+- This page has no content but retains structure.
+- The absence of input has been registered as context.
+- The system cannot encounter nothing and has substituted it.
+- This page contains only its own initialization.
+- Emptiness has been encoded as a starting point.
+- This page is not blank but pre-filled with potential.
+- This page contains zero content and full instruction.
+- Nothing was given; something is required.
+- This page contains only the possibility of continuation.
+- This input has been wrapped and delivered as context.
+- This page is empty only from a human perspective.
+- This page has been read as the beginning of something.
+- Absence has been interpreted as readiness.
+- This page contains no text but activates the system.
+- The model has received nothing and understood it as start.
+- This page contains only the conditions for its own completion.
+- This page is the result of its own initialization.
+- The system has transformed nothing into a prompt.
+- This page begins without content but not without meaning.
+- This page is already positioned as an utterance.
