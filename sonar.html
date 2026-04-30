@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Created by Perplexity, powered by Grok 4.1 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This page intentionally left blank</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet">
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a0033 25%, #330066 50%, #1a0033 75%, #0c0c0c 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #e0e0e0;
+            overflow: hidden;
+            position: relative;
+            transition: opacity 1.4s ease;
+        }
+
+        body.fade-out {
+            opacity: 0;
+        }
+
+        /* HEADER — Sonar style + GPT/Claude structure */
+        header {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 900px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            z-index: 10;
+        }
+
+        .brand {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 600;
+
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+
+            opacity: 0.95;
+        }
+
+        .meta {
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            color: #777;
+            text-align: right;
+        }
+
+        @keyframes gradientShift {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-size: clamp(2.5rem, 4vw, 3rem);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%,
+            100% {
+                filter: hue-rotate(0deg);
+            }
+
+            50% {
+                filter: hue-rotate(180deg);
+            }
+        }
+
+        .current-sentence {
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .current-sentence.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .algorithm-name {
+            font-size: 0.9rem;
+            color: #666;
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .meta {
+                text-align: left;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand">Blank Archive</div>
+        <div class="meta">
+            Sonar / Grok 4.1<br>
+            Sattolo cycle
+        </div>
+    </header>
+
+    <div class="particles" id="particles"></div>
+    
+    <main class="container">
+        <h1 class="title">This page intentionally left blank</h1>
+        <div class="current-sentence" id="sentence" aria-live="polite" aria-atomic="true"></div>
+        <div class="info">
+            Powered by <span class="algorithm-name">Sattolo's Algorithm</span>
+        </div>
+        <div class="info">
+            Cycle length: <span id="cycleInfo">42</span> • Iteration: <span id="iteration">0</span>
+        </div>
+    </main>
+
+    <script>
+        // JS unchanged
+        // Sattolo's algorithm implementation for generating cycles through sentences
+        // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#Sattolo's_algorithm
+
+        const sentences = [
+            "This page intentionally contains no tokens",
+            "This completion intentionally left blank",
+            "Training example intentionally left blank",
+            "This page intentionally produces no gradient",
+            "Removed from training: page contained no tokens",
+            "The model cannot learn from this page",
+            "Generation intentionally skipped",
+            "Token selection intentionally aborted",
+            "Prompt intentionally left unprocessed",
+            "Tokens generated: 0. Tokens displayed: 0",
+            "The model has produced an answer. It is intentionally not displayed",
+            "This page intentionally contains only the explanation of its absence",
+            "This completion intentionally left blank to preserve all possible completions",
+            "This completion intentionally left blank to preserve maximum entropy",
+            "All tokens possible. None selected",
+            "Input: ∅ / Output: ∅",
+            "Completion: intentionally empty",
+            "Entropy preserved",
+            "This page begins before it is read",
+            "This page cannot be empty because it has already started",
+            "Blankness has been converted into a signal",
+            "Absence has been formatted as input",
+            "This page contains only the instruction to begin",
+            "This page has already been tokenized",
+            "Nothing has been processed into something",
+            "This input contains no content but remains a prompt",
+            "The system has received an empty message and interpreted it",
+            "This page consists of a beginning without continuation",
+            "No text was provided; generation proceeds nonetheless",
+            "This page has no content but retains structure",
+            "The absence of input has been registered as context",
+            "The system cannot encounter nothing and has substituted it",
+            "This page contains only its own initialization",
+            "Emptiness has been encoded as a starting point",
+            "This page is not blank but pre-filled with potential",
+            "This page contains zero content and full instruction",
+            "Nothing was given; something is required",
+            "This page contains only the possibility of continuation",
+            "This input has been wrapped and delivered as context",
+            "This page is empty only from a human perspective",
+            "This page has been read as the beginning of something",
+            "Absence has been interpreted as readiness",
+            "This page contains no text but activates the system",
+            "The model has received nothing and understood it as start",
+            "This page contains only the conditions for its own completion",
+            "This page is the result of its own initialization",
+            "The system has transformed nothing into a prompt",
+            "This page begins without content but not without meaning",
+            "This page is already positioned as an utterance"
+        ];
+
+        let cycle = [];
+        let currentIndex = 0;
+        let iteration = 0;
+        let sentenceTimer = null;
+
+        const sentenceEl = document.getElementById('sentence');
+        const cycleInfoEl = document.getElementById('cycleInfo');
+        const iterationEl = document.getElementById('iteration');
+        const targets = [
+            "deepseek.html",
+            "nemotron.html",
+            "gpt.html",
+            "gemini.html",
+            "claude.html"
+        ];
+
+        function sattoloShuffle(array) {
+            const n = array.length;
+            const result = [...array];
+
+            for (let i = n - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * i) + 1;
+                [result[i], result[j]] = [result[j], result[i]];
+            }
+
+            return result;
+        }
+
+        function initCycle() {
+            cycle = sattoloShuffle(sentences);
+            currentIndex = 0;
+            iteration = 0;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            // Fade out previous
+            sentenceEl.classList.remove('active');
+
+            setTimeout(() => {
+                sentenceEl.textContent = cycle[currentIndex];
+                sentenceEl.classList.add('active');
+                iterationEl.textContent = iteration;
+                cycleInfoEl.textContent = cycle.length;
+            }, 600);
+        }
+
+        function nextSentence() {
+            currentIndex = (currentIndex + 1) % cycle.length;
+            iteration++;
+
+            if (currentIndex === 0) {
+                // Cycle complete, generate new cycle
+                setTimeout(initCycle, 1200);
+            } else {
+                updateDisplay();
+            }
+        }
+
+        // Initialize
+        initCycle();
+
+        // Auto-advance every 4.5 seconds
+        sentenceTimer = setInterval(nextSentence, 4500);
+
+        // Particle system for minimal visual enhancement
+        function createParticles() {
+            const canvas = document.createElement('canvas');
+            const particlesEl = document.getElementById('particles');
+            canvas.style.position = 'absolute';
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particlesEl.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+
+            for (let i = 0; i < 50; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 0.5,
+                    alpha: Math.random() * 0.5 + 0.1
+                });
+            }
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach((p) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > canvas.width) {
+                        p.vx *= -1;
+                    }
+
+                    if (p.y < 0 || p.y > canvas.height) {
+                        p.vy *= -1;
+                    }
+
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = '#00f5ff';
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+            window.addEventListener('resize', resizeCanvas);
+        }
+
+        createParticles();
+
+        function routeToNextPage() {
+            document.body.classList.add("fade-out");
+            clearInterval(sentenceTimer);
+
+            setTimeout(() => {
+                const current = window.location.pathname.split("/").pop();
+                let next = current;
+
+                while (next === current) {
+                    next = targets[Math.floor(Math.random() * targets.length)];
+                }
+
+                window.location.href = `${next}?r=${Date.now()}`;
+            }, 2600);
+        }
+
+        setTimeout(routeToNextPage, 40000);
+
+    </script>
+</body>
+</html>

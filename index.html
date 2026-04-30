@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>This page intentionally left blank</title>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: #fff;
+      color: #000;
+      font: 20px/1.4 monospace;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: opacity 1.4s ease;
+    }
+
+    body.fade-out {
+      opacity: 0;
+    }
+
+    header {
+      width: calc(100% - 40px);
+      max-width: 42rem;
+      margin-top: 1.5rem;
+      margin-bottom: 3.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    main {
+      width: 100%;
+      max-width: 42rem;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 1.8s ease;
+    }
+
+    main.visible {
+      opacity: 1;
+    }
+
+    main.fade-out {
+      opacity: 0;
+      transition-duration: 1.4s;
+    }
+
+    h1,
+    p,
+    pre {
+      margin: 0 0 1rem;
+      font: inherit;
+    }
+
+    h1 {
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    pre {
+      width: 100%;
+      min-height: 6lh;
+      padding-top: 1rem;
+      display: block;
+      border-top: 1px solid #000;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .meta {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    button {
+      margin: 1rem 0.5rem 0 0;
+      padding: 0.3rem 0.6rem;
+      border: 1px solid #000;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    button:focus-visible {
+      outline: 2px solid #000;
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body,
+      main {
+        transition-duration: 0.01ms;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>Blank Archive</div>
+    <div>Bruno Ministro</div>
+  </header>
+
+  <main id="canvas">
+    <h1>This page intentionally left blank</h1>
+
+    <p>A rotating permutation of absent completions.</p>
+
+    <pre id="output" aria-live="polite">Completion: intentionally empty.</pre>
+
+    <div class="meta">
+      <span>step: <span id="step">0</span></span>
+      <span> / </span>
+      <span>mode: cyclic permutation</span>
+    </div>
+
+    <button id="toggle" type="button" aria-pressed="false">pause</button>
+  </main>
+
+  <script>
+    const source = [
+      "This page intentionally contains no tokens.",
+      "This completion intentionally left blank.",
+      "Training example intentionally left blank.",
+      "This page intentionally produces no gradient.",
+      "Removed from training: page contained no tokens.",
+      "The model cannot learn from this page.",
+      "Generation intentionally skipped.",
+      "Token selection intentionally aborted.",
+      "Prompt intentionally left unprocessed.",
+      "Tokens generated: 0. Tokens displayed: 0.",
+      "The model has produced an answer. It is intentionally not displayed.",
+      "This page intentionally contains only the explanation of its absence.",
+      "This completion intentionally left blank to preserve all possible completions.",
+      "This completion intentionally left blank to preserve maximum entropy.",
+      "All tokens possible. None selected.",
+      "Input: ∅ / Output: ∅",
+      "Completion: intentionally empty.",
+      "Entropy preserved.",
+      "This page begins before it is read.",
+      "This page cannot be empty because it has already started.",
+      "Blankness has been converted into a signal.",
+      "Absence has been formatted as input.",
+      "This page contains only the instruction to begin.",
+      "This page has already been tokenized.",
+      "Nothing has been processed into something.",
+      "This input contains no content but remains a prompt.",
+      "The system has received an empty message and interpreted it.",
+      "This page consists of a beginning without continuation.",
+      "No text was provided; generation proceeds nonetheless.",
+      "This page has no content but retains structure.",
+      "The absence of input has been registered as context.",
+      "The system cannot encounter nothing and has substituted it.",
+      "This page contains only its own initialization.",
+      "Emptiness has been encoded as a starting point.",
+      "This page is not blank but pre-filled with potential.",
+      "This page contains zero content and full instruction.",
+      "Nothing was given; something is required.",
+      "This page contains only the possibility of continuation.",
+      "This input has been wrapped and delivered as context.",
+      "This page is empty only from a human perspective.",
+      "This page has been read as the beginning of something.",
+      "Absence has been interpreted as readiness.",
+      "This page contains no text but activates the system.",
+      "The model has received nothing and understood it as start.",
+      "This page contains only the conditions for its own completion.",
+      "This page is the result of its own initialization.",
+      "The system has transformed nothing into a prompt.",
+      "This page begins without content but not without meaning.",
+      "This page is already positioned as an utterance."
+    ];
+
+    const targets = [
+      "sonar.html",
+      "deepseek.html",
+      "nemotron.html",
+      "gpt.html",
+      "gemini.html",
+      "claude.html"
+    ];
+
+    const output = document.getElementById("output");
+    const stepNode = document.getElementById("step");
+    const toggleBtn = document.getElementById("toggle");
+    const canvas = document.getElementById("canvas");
+
+    let step = 0;
+    let running = true;
+    let timer = null;
+
+    function rotate(arr, n) {
+      const k = n % arr.length;
+      return arr.slice(k).concat(arr.slice(0, k));
+    }
+
+    function permute(line, n) {
+      const parts = line.split(/(?<=[.:])/).filter(Boolean);
+
+      if (parts.length < 2) {
+        return line;
+      }
+
+      const k = n % parts.length;
+      return parts
+        .slice(k)
+        .concat(parts.slice(0, k))
+        .join(" ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function render() {
+      const cycled = rotate(source, step);
+      let line = cycled[0];
+
+      if (step % 2 === 1) {
+        line = permute(line, step);
+      }
+
+      if (step % 4 === 0) {
+        line = line.replace("intentionally", "deliberately");
+      }
+
+      if (step % 4 === 2) {
+        line = line.replace("deliberately", "intentionally");
+      }
+
+      output.textContent = line;
+      stepNode.textContent = step;
+      step += 1;
+    }
+
+    function start() {
+      if (timer !== null) {
+        return;
+      }
+
+      timer = setInterval(render, 2800);
+    }
+
+    function stop() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    function routeToNextPage() {
+      document.body.classList.add("fade-out");
+      stop();
+
+      setTimeout(() => {
+        const current = window.location.pathname.split("/").pop();
+        let next = current;
+
+        while (next === current) {
+          next = targets[Math.floor(Math.random() * targets.length)];
+        }
+
+        window.location.href = `${next}?r=${Date.now()}`;
+      }, 2600);
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      running = !running;
+      toggleBtn.textContent = running ? "pause" : "resume";
+      toggleBtn.setAttribute("aria-pressed", String(!running));
+
+      if (running) {
+        start();
+      } else {
+        stop();
+      }
+    });
+
+    setTimeout(() => {
+      canvas.classList.add("visible");
+      render();
+      start();
+    }, 800);
+
+    setTimeout(routeToNextPage, 40000);
+  </script>
+</body>
+</html>

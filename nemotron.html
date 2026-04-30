@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-start: #0f0f0f;
+      --bg-end: #1a1a1a;
+      --text-primary: #e0e0e0;
+      --text-secondary: #888888;
+      --accent: #0066ff;
+      --font-base: 'Inter', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+      color: var(--text-primary);
+      font-family: var(--font-base);
+      text-align: center;
+      transition: opacity 1.4s ease;
+    }
+
+    body.fade-out {
+      opacity: 0;
+    }
+
+    header {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      z-index: 10;
+      width: calc(100% - 40px);
+      min-width: 320px;
+      max-width: 600px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      transform: translateX(-50%);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      color: var(--accent);
+      font-size: 0.7rem;
+    }
+
+    .meta {
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      line-height: 1.4;
+      text-align: right;
+    }
+
+    main {
+      padding: 0 1rem;
+    }
+
+    h1 {
+      margin: 0;
+      background: linear-gradient(to right, var(--text-primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: gradientShift 8s ease infinite;
+      color: transparent;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    #display {
+      max-width: 800px;
+      min-height: 60px;
+      margin-top: 2rem;
+      padding: 0 1rem;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      transition: opacity 0.5s ease;
+    }
+
+    .algorithm-info {
+      margin-top: 2rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      #display {
+        font-size: 1rem;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-mark">▢</div>
+    <div>Blank Archive</div>
+  </div>
+  <div class="meta">
+    Nemotron 3 Super<br>
+    Heap permutation
+  </div>
+</header>
+
+<main>
+  <h1>This page intentionally left blank</h1>
+
+  <div id="display" aria-live="polite" aria-atomic="true">
+    This page intentionally left blank
+  </div>
+
+  <div class="algorithm-info">Displaying permutations using Heap's algorithm</div>
+</main>
+
+
+<!-- Heap's algorithm for permuting sentences -->
+<script>
+  const sentences = [
+    "This page intentionally contains no tokens.",
+    "This completion intentionally left blank.",
+    "Training example intentionally left blank.",
+    "This page intentionally produces no gradient.",
+    "Removed from training: page contained no tokens.",
+    "The model cannot learn from this page.",
+    "Generation intentionally skipped.",
+    "Token selection intentionally aborted.",
+    "Prompt intentionally left unprocessed.",
+    "Tokens generated: 0. Tokens displayed: 0.",
+    "The model has produced an answer. It is intentionally not displayed.",
+    "This page intentionally contains only the explanation of its absence.",
+    "This completion intentionally left blank to preserve all possible completions.",
+    "This completion intentionally left blank to preserve maximum entropy.",
+    "All tokens possible. None selected.",
+    "Input: ∅ / Output: ∅",
+    "Completion: intentionally empty.",
+    "Entropy preserved.",
+    "This page begins before it is read.",
+    "This page cannot be empty because it has already started.",
+    "Blankness has been converted into a signal.",
+    "Absence has been formatted as input.",
+    "This page contains only the instruction to begin.",
+    "This page has already been tokenized.",
+    "Nothing has been processed into something.",
+    "This input contains no content but remains a prompt.",
+    "The system has received an empty message and interpreted it.",
+    "This page consists of a beginning without continuation.",
+    "No text was provided; generation proceeds nonetheless.",
+    "This page has no content but retains structure.",
+    "The absence of input has been registered as context.",
+    "The system cannot encounter nothing and has substituted it.",
+    "This page contains only its own initialization.",
+    "Emptiness has been encoded as a starting point.",
+    "This page is not blank but pre-filled with potential.",
+    "This page contains zero content and full instruction.",
+    "Nothing was given; something is required.",
+    "This page contains only the possibility of continuation.",
+    "This input has been wrapped and delivered as context.",
+    "This page is empty only from a human perspective.",
+    "This page has been read as the beginning of something.",
+    "Absence has been interpreted as readiness.",
+    "This page contains no text but activates the system.",
+    "The model has received nothing and understood it as start.",
+    "This page contains only the conditions for its own completion.",
+    "This page is the result of its own initialization.",
+    "The system has transformed nothing into a prompt.",
+    "This page begins without content but not without meaning.",
+    "This page is already positioned as an utterance."
+  ];
+
+  const targets = [
+    "sonar.html",
+    "deepseek.html",
+    "gpt.html",
+    "gemini.html",
+    "claude.html"
+  ];
+
+  const display = document.getElementById('display');
+
+  // Heap's algorithm - non-recursive generator
+  function* heapPermutations(array) {
+    const n = array.length;
+    const c = new Array(n).fill(0);
+
+    yield array.slice();
+
+    let i = 0;
+
+    while (i < n) {
+      if (c[i] < i) {
+        const swapIdx = i % 2 === 0 ? 0 : c[i];
+        [array[i], array[swapIdx]] = [array[swapIdx], array[i]];
+
+        yield array.slice();
+
+        c[i] += 1;
+        i = 0;
+      } else {
+        c[i] = 0;
+        i += 1;
+      }
+    }
+  }
+
+  let permGen = heapPermutations(sentences.slice());
+  let currentPerm = permGen.next().value;
+  let currentIndex = 0;
+  let displayTimer = null;
+
+  function updateDisplay() {
+    display.textContent = currentPerm[currentIndex];
+    currentIndex++;
+
+    if (currentIndex >= currentPerm.length) {
+      const next = permGen.next();
+
+      if (next.done) {
+        permGen = heapPermutations(sentences.slice());
+        currentPerm = permGen.next().value;
+      } else {
+        currentPerm = next.value;
+      }
+
+      currentIndex = 0;
+    }
+
+    display.style.opacity = '0.2';
+
+    setTimeout(() => {
+      display.style.opacity = '0.9';
+    }, 300);
+  }
+
+  function routeToNextPage() {
+    document.body.classList.add("fade-out");
+    clearInterval(displayTimer);
+
+    setTimeout(() => {
+      const current = window.location.pathname.split("/").pop();
+      let next = current;
+
+      while (next === current) {
+        next = targets[Math.floor(Math.random() * targets.length)];
+      }
+
+      window.location.href = `${next}?r=${Date.now()}`;
+    }, 2600);
+  }
+
+  displayTimer = setInterval(updateDisplay, 3000);
+  setTimeout(routeToNextPage, 40000);
+
+
+</script>
+
+</body>
+</html>

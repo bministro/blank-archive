@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Language model: GPT-5.4 -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intentionally Left Blank</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #fbfaf7;
+      --surface: #f2efe8;
+      --surface-2: #ece6db;
+      --text: #1f1b16;
+      --muted: #6f685f;
+      --faint: #9b9488;
+      --accent: #176b5a;
+      --accent-soft: rgba(23, 107, 90, 0.12);
+      --line: rgba(31, 27, 22, 0.11);
+      --shadow: 0 12px 36px rgba(31, 27, 22, 0.06);
+      --radius: 18px;
+      --font-display: 'Newsreader', Georgia, serif;
+      --font-body: 'Manrope', system-ui, sans-serif;
+      --text-xs: clamp(0.75rem, 0.72rem + 0.2vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.82rem + 0.25vw, 1rem);
+      --text-base: clamp(1rem, 0.96rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.4rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+      --text-2xl: clamp(2.2rem, 1.1rem + 3vw, 4.3rem);
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      --transition: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: none;
+      text-size-adjust: none;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100dvh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(23, 107, 90, 0.06), transparent 28%),
+        linear-gradient(180deg, var(--bg), #f7f4ee 100%);
+      transition: opacity 1.4s ease;
+    }
+
+    body.fade-out {
+      opacity: 0;
+    }
+
+    ::selection {
+      background: var(--accent-soft);
+      color: var(--text);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: var(--space-6);
+      gap: var(--space-8);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: var(--space-4);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--surface-2), var(--surface));
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .brand svg {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+    }
+
+    .brand-name {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .meta {
+      text-align: right;
+      font-size: var(--text-xs);
+      color: var(--muted);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-8);
+      align-items: stretch;
+    }
+
+    .hero,
+    .panel {
+      background: rgba(255,255,255,0.34);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero {
+      padding: clamp(2rem, 4vw, 4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-12);
+      min-height: 520px;
+    }
+
+    .eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--space-6);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      max-width: 11ch;
+    }
+
+    .lede {
+      max-width: 34ch;
+      color: var(--muted);
+      font-size: var(--text-sm);
+    }
+
+    .footnote {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      color: var(--muted);
+      font-size: var(--text-xs);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .panel {
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      min-height: 520px;
+    }
+
+    .panel-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .panel-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      line-height: 1.05;
+    }
+
+    .algo-badge {
+      font-size: var(--text-xs);
+      color: var(--accent);
+      background: var(--accent-soft);
+      padding: var(--space-2) var(--space-3);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .viewer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-6);
+      padding: var(--space-8);
+      border-radius: calc(var(--radius) - 6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(242,239,232,0.7));
+      border: 1px solid rgba(31, 27, 22, 0.07);
+      min-height: 260px;
+    }
+
+    .viewer-index {
+      font-size: var(--text-xs);
+      color: var(--faint);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sentence {
+      font-family: var(--font-display);
+      font-size: clamp(1.55rem, 1.1rem + 1.5vw, 2.4rem);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      transition: opacity 300ms ease, transform 300ms ease;
+      min-height: 4.5lh;
+      display: flex;
+      align-items: center;
+    }
+
+    .sentence.is-changing {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    button,
+    select {
+      font: inherit;
+      color: inherit;
+    }
+
+    .btn,
+    .select {
+      min-height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.55);
+      padding: 0 var(--space-4);
+      transition: var(--transition);
+    }
+
+    .btn {
+      cursor: pointer;
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    .btn:hover,
+    .select:hover {
+      border-color: rgba(23, 107, 90, 0.35);
+      background: rgba(255,255,255,0.9);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #f7f5ef;
+      border-color: var(--accent);
+    }
+
+    .btn.primary:hover {
+      background: #115447;
+      border-color: #115447;
+    }
+
+    .select {
+      color: var(--muted);
+      padding-right: var(--space-8);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding-top: var(--space-4);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      font-size: var(--text-xs);
+      color: var(--faint);
+    }
+
+    @media (max-width: 860px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .hero,
+      .panel {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        padding: var(--space-4);
+      }
+
+      header,
+      .panel-top,
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .meta {
+        text-align: left;
+      }
+
+      .viewer {
+        padding: var(--space-6);
+      }
+
+      .sentence {
+        min-height: 5.5lh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="4" width="11" height="14" rx="1.5"></rect>
+            <path d="M9 8h4"></path>
+            <path d="M9 12h6"></path>
+            <path d="M8 20h11"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-name">Blank Archive</div>
+        </div>
+      </div>
+      <div class="meta">GPT-5.4 · Lexicographic permutation</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Minimal computing</p>
+          <h1>This page intentionally left blank</h1>
+        </div>
+        <div>
+          <p class="lede">A single sentence appears at a time while the full set remains preserved in a lexicographic permutation sequence.</p>
+        </div>
+        <div class="footnote">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Quiet interface, one changing line.</span>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Permutation display">
+        <div class="panel-top">
+          <div>
+            <p class="panel-title">Current sentence</p>
+          </div>
+          <div class="algo-badge">Knuth’s Algorithm L</div>
+        </div>
+
+        <div class="viewer">
+          <div class="viewer-index" id="viewerIndex">Step 0 · Position 1 of 49</div>
+          <p class="sentence" id="sentence" aria-live="polite" aria-atomic="true"></p>
+        </div>
+
+        <div class="controls">
+          <button class="btn" id="prevBtn" type="button">Prev</button>
+          <button class="btn primary" id="toggleBtn" type="button" aria-pressed="true">Pause</button>
+          <button class="btn" id="nextBtn" type="button">Next</button>
+          <button class="btn" id="resetBtn" type="button">Reset</button>
+          <select class="select" id="speedSelect" aria-label="Speed">
+            <option value="1800">Fast</option>
+            <option value="3200" selected>Normal</option>
+            <option value="5000">Slow</option>
+          </select>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>One sentence visible at a time.</span>
+      <span>Source includes model note and algorithm comment.</span>
+    </footer>
+  </div>
+
+  <!-- Lexicographic permutation algorithm (Knuth’s Algorithm L)
+       Produces the next permutation in lexicographic order by:
+       1) finding the rightmost ascent,
+       2) swapping with the least greater element to its right,
+       3) reversing the suffix.
+  -->
+  <script>
+    const sentences = [
+      "This page intentionally contains no tokens.",
+      "This completion intentionally left blank.",
+      "Training example intentionally left blank.",
+      "This page intentionally produces no gradient.",
+      "Removed from training: page contained no tokens.",
+      "The model cannot learn from this page.",
+      "Generation intentionally skipped.",
+      "Token selection intentionally aborted.",
+      "Prompt intentionally left unprocessed.",
+      "Tokens generated: 0. Tokens displayed: 0.",
+      "The model has produced an answer. It is intentionally not displayed.",
+      "This page intentionally contains only the explanation of its absence.",
+      "This completion intentionally left blank to preserve all possible completions.",
+      "This completion intentionally left blank to preserve maximum entropy.",
+      "All tokens possible. None selected.",
+      "Input: ∅ / Output: ∅",
+      "Completion: intentionally empty.",
+      "Entropy preserved.",
+      "This page begins before it is read.",
+      "This page cannot be empty because it has already started.",
+      "Blankness has been converted into a signal.",
+      "Absence has been formatted as input.",
+      "This page contains only the instruction to begin.",
+      "This page has already been tokenized.",
+      "Nothing has been processed into something.",
+      "This input contains no content but remains a prompt.",
+      "The system has received an empty message and interpreted it.",
+      "This page consists of a beginning without continuation.",
+      "No text was provided; generation proceeds nonetheless.",
+      "This page has no content but retains structure.",
+      "The absence of input has been registered as context.",
+      "The system cannot encounter nothing and has substituted it.",
+      "This page contains only its own initialization.",
+      "Emptiness has been encoded as a starting point.",
+      "This page is not blank but pre-filled with potential.",
+      "This page contains zero content and full instruction.",
+      "Nothing was given; something is required.",
+      "This page contains only the possibility of continuation.",
+      "This input has been wrapped and delivered as context.",
+      "This page is empty only from a human perspective.",
+      "This page has been read as the beginning of something.",
+      "Absence has been interpreted as readiness.",
+      "This page contains no text but activates the system.",
+      "The model has received nothing and understood it as start.",
+      "This page contains only the conditions for its own completion.",
+      "This page is the result of its own initialization.",
+      "The system has transformed nothing into a prompt.",
+      "This page begins without content but not without meaning.",
+      "This page is already positioned as an utterance."
+    ];
+
+    const sentenceEl = document.getElementById('sentence');
+    const viewerIndexEl = document.getElementById('viewerIndex');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const speedSelect = document.getElementById('speedSelect');
+
+    const targets = [
+      "sonar.html",
+      "deepseek.html",
+      "nemotron.html",
+      "gemini.html",
+      "claude.html"
+    ];
+
+    let perm = Array.from({ length: sentences.length }, (_, i) => i);
+    let history = [perm.slice()];
+    let permutationStep = 0;
+    let positionInPermutation = 0;
+    let playing = true;
+    let timer = null;
+
+    function render(withAnimation = true) {
+      const sentenceIndex = perm[positionInPermutation];
+      const nextText = sentences[sentenceIndex];
+
+      if (withAnimation) {
+        sentenceEl.classList.add('is-changing');
+        setTimeout(() => {
+          sentenceEl.textContent = nextText;
+          viewerIndexEl.textContent = `Step ${permutationStep} · Position ${positionInPermutation + 1} of ${perm.length}`;
+          sentenceEl.classList.remove('is-changing');
+        }, 180);
+      } else {
+        sentenceEl.textContent = nextText;
+        viewerIndexEl.textContent = `Step ${permutationStep} · Position ${positionInPermutation + 1} of ${perm.length}`;
+      }
+    }
+
+    function nextLexicographic(arr) {
+      let j = arr.length - 2;
+
+      while (j >= 0 && arr[j] >= arr[j + 1]) {
+        j--;
+      }
+
+      if (j < 0) {
+        return null;
+      }
+
+      let l = arr.length - 1;
+
+      while (arr[j] >= arr[l]) {
+        l--;
+      }
+
+      [arr[j], arr[l]] = [arr[l], arr[j]];
+
+      let left = j + 1;
+      let right = arr.length - 1;
+      while (left < right) {
+        [arr[left], arr[right]] = [arr[right], arr[left]];
+        left++;
+        right--;
+      }
+      return arr;
+    }
+
+    function stepForward() {
+      if (positionInPermutation < perm.length - 1) {
+        positionInPermutation += 1;
+      } else {
+        const next = nextLexicographic(perm.slice());
+        if (next) {
+          perm = next;
+          permutationStep += 1;
+          history.push(perm.slice());
+        } else {
+          perm = Array.from({ length: sentences.length }, (_, i) => i);
+          permutationStep = 0;
+          history = [perm.slice()];
+        }
+        positionInPermutation = 0;
+      }
+      render(true);
+    }
+
+    function stepBackward() {
+      if (positionInPermutation > 0) {
+        positionInPermutation -= 1;
+      } else if (permutationStep > 0) {
+        permutationStep -= 1;
+        perm = history[permutationStep].slice();
+        positionInPermutation = perm.length - 1;
+      } else {
+        positionInPermutation = 0;
+      }
+      render(true);
+    }
+
+    function resetSequence() {
+      perm = Array.from({ length: sentences.length }, (_, i) => i);
+      history = [perm.slice()];
+      permutationStep = 0;
+      positionInPermutation = 0;
+      render(false);
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+
+      timer = setInterval(() => {
+        if (playing) {
+          stepForward();
+        }
+      }, Number(speedSelect.value));
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      playing = !playing;
+      toggleBtn.textContent = playing ? 'Pause' : 'Play';
+      toggleBtn.setAttribute('aria-pressed', String(playing));
+    });
+
+    nextBtn.addEventListener('click', () => stepForward());
+    prevBtn.addEventListener('click', () => stepBackward());
+    resetBtn.addEventListener('click', () => resetSequence());
+    speedSelect.addEventListener('change', startTimer);
+
+    render(false);
+    startTimer();
+
+    function routeToNextPage() {
+      document.body.classList.add("fade-out");
+      stopTimer();
+
+      setTimeout(() => {
+        const current = window.location.pathname.split("/").pop();
+        let next = current;
+
+        while (next === current) {
+          next = targets[Math.floor(Math.random() * targets.length)];
+        }
+
+        window.location.href = `${next}?r=${Date.now()}`;
+      }, 2600);
+    }
+
+    setTimeout(routeToNextPage, 40000);
+
+  </script>
+</body>
+</html>
