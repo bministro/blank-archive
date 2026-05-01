@@ -27,8 +27,14 @@ DeepSeek 3.2 → Plain changes (change-ringing)
 
 Here’s a compact differentiation:  
 **Heap’s algorithm** — generates all permutations through recursive swaps, emphasizing systematic exhaustiveness rather than perceptual order  
+
 **Steinhaus–Johnson–Trotter** — produces permutations by swapping adjacent elements only, so each step is a minimal local change (very “smooth” transitions)  
+
 **Lexicographic (Knuth’s Algorithm L)** — lists permutations in sorted alphabetical order, giving a clear, ordered progression with a defined beginning and end  
+
 **Fisher–Yates shuffle** — produces a uniformly random permutation each time, with no memory or continuity between states  
+
 **Sattolo’s algorithm** — like Fisher–Yates but ensures a single cyclic permutation (no element stays in its original position), creating a closed loop  
+
 **Plain changes (change-ringing)** — a method where each permutation differs by small, rule-based swaps, producing rhythmic, almost ritualistic sequences  
+
