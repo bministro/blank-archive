@@ -26,6 +26,7 @@ Perplexity Sonar 2 → Sattolo’s algorithm
 DeepSeek 3.2 → Plain changes (change-ringing)  
 
 Here’s a compact differentiation:  
+
 **Heap’s algorithm** — generates all permutations through recursive swaps, emphasizing systematic exhaustiveness rather than perceptual order  
 
 **Steinhaus–Johnson–Trotter** — produces permutations by swapping adjacent elements only, so each step is a minimal local change (very “smooth” transitions)  
