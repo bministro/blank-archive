@@ -1,8 +1,10 @@
+ 
+
+<img width="972" height="560" alt="screenshot_landing" src="https://github.com/user-attachments/assets/f0485d00-9bf4-4714-9f28-e983c6aa860a" />  
+
 Blank Archive  
-Bruno Ministro  
-
-<img width="972" height="560" alt="screenshot_landing" src="https://github.com/user-attachments/assets/f0485d00-9bf4-4714-9f28-e983c6aa860a" />
-
+Bruno Ministro 
+screenshot → index.html
 
 This work will appear soon in  
 [Compoetics](https://compoetics.com/) - a journal of poetry, computation, intermedia, and communities  
