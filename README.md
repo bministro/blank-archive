@@ -16,13 +16,13 @@ edited by Chris Tanasescu aka MARGENTO
 
 
 
-## About this work  
+## about:blank 
 
 Blank Archive explores the conditions of writing and reading in natural and programming languages in times of generative AI. A minimal interface displays the sentence "This page intentionally left blank," followed by a continuous permutation of related statements. The work exists in six parallel versions, each generated from the same prompt by different language models and selected at random on each refresh.  
 
 See my full note published in Compoetics: tba  
 
-## Some specs and details  
+## some specs and details  
 
 **Models and permutation algorithms used**  
 Claude Sonnet 4.5 → Steinhaus–Johnson–Trotter  
