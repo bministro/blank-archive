@@ -18,7 +18,9 @@ edited by Chris Tanasescu aka MARGENTO
 
 ## About this work 
 
-Blank Archive explores the conditions of writing and reading across natural language and programming language in the present landscape of generative AI. A minimal interface displays the sentence "This page intentionally left blank," followed by a continuous permutation of related statements. The work exists in six parallel versions, each generated from the same prompt by different language models and selected at random on each refresh.  
+Large language models are trained on trillions of tokens, many of them extracted from books in shadow libraries. Among them, the models have almost certainly encountered the paradoxical declaration: "This page intentionally left blank." But how does an AI system read such a statement? What does it learn from an absence structured as text? And what would a zero prompt look like in a moment when every book page and web page seems destined to be absorbed into the black boxes of AI? Blank Archive is my tentative response to these questions.
+
+Blank Archive explores the conditions of writing and reading across natural language and programming language in the present landscape of generative AI. A minimal interface displays the sentence "This page intentionally left blank," followed by a continuous permutation of related statements. The work exists in six parallel versions, each generated from the same prompt by different language models and selected at random every 40 seconds.  
 
 See my full note published in Compoetics: tba  
 
